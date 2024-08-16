@@ -22,7 +22,7 @@ def suggest_commit_messages(diff) -> list[str]:
 
 def prepare_prompt(diff):
     return f"""
-You are a helpful AI assistant tasked with generating concise and clear commit messages. You will be given the output of a `git diff --staged` command, which describes the changes made to the codebase. Your task is to generate exactly 4 suggested commit messages that accurately capture the essence of these changes. The messages should be concise and to the point, reflecting best practices for commit messages.
+You are a helpful AI assistant tasked with generating concise and clear commit messages. You will be given the output of a `git diff --staged` command, which describes the changes made to the codebase. Your task is to generate exactly 4 suggested commit messages that accurately capture the essence of these changes and the file names. The messages should be concise and to the point, reflecting best practices for commit messages.
 
 Please format the output as follows:
 
@@ -30,8 +30,6 @@ Please format the output as follows:
 2. [Second commit message]
 3. [Third commit message]
 4. [Fourth commit message]
-
-And don't be verbose, just return the four messages.
 
 Here is the diff output:
 
