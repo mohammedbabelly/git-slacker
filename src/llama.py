@@ -14,11 +14,29 @@ def suggest_commit_messages(diff) -> list[str]:
         headers = {"content-type": "application/json"}
         response = requests.post(llama_url, headers=headers, data=json.dumps(payload))
         commit_text = response.json()["response"]
-
-        return re.findall(r'\d+\.\s"([^"]+)"', commit_text)
+        messages = re.findall(r'\d+\.\s*(.+)', commit_text)
+        return messages
     except Exception as e:
         return f"Error while sending request to ollama! {str(e)}"
 
 
 def prepare_prompt(diff):
-    return f"Given a Git diff describing {diff}, what are four clear and concise commit messages that captures the essence of these changes? Don't be verbose, only return the four suggested commit messages in this format (1. \n 2. \n 3. \n 4.)"
+    return f"""
+You are a helpful AI assistant tasked with generating concise and clear commit messages. You will be given the output of a `git diff --staged` command, which describes the changes made to the codebase. Your task is to generate exactly 4 suggested commit messages that accurately capture the essence of these changes. The messages should be concise and to the point, reflecting best practices for commit messages.
+
+Please format the output as follows:
+
+1. [First commit message]
+2. [Second commit message]
+3. [Third commit message]
+4. [Fourth commit message]
+
+And don't be verbose, just return the four messages.
+
+Here is the diff output:
+
+```
+{diff}
+```
+
+"""
