@@ -19,3 +19,6 @@ A simple Python script that uses the Llama3 API to generate commit messages base
 2. Run the script with a Git diff as an argument, e.g., `python src/app.py </repo/path>`
 3. If no argument is provided, you will be prompted to enter one manually
 4. Choose your preferred commit message from the generated list to apply it
+
+**Run tests**
+Make sure all tests are passed `pytest tests/`
