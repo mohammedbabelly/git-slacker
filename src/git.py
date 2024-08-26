@@ -22,7 +22,7 @@ def get_diff(repo_path: str):
 def apply_commit(repo_path: str, commit_message: str):
     if commit_message:
         subprocess.run(
-            f'git commit -m "{commit_message}"',
+            f'git commit -m {commit_message}',
             shell=True,
             cwd=repo_path,
         )
